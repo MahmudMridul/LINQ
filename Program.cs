@@ -1,5 +1,6 @@
 ﻿using LINQ.ExtensionMethods;
 using LINQ.DeferredExecution;
+using LINQ.Examples;
 
 namespace LINQ
 {
@@ -7,7 +8,8 @@ namespace LINQ
     {
         static void Main(string[] args)
         {
-            DeferredExecutionExamples.ExampleOne();
+            MethodSyntax.AnyExample();
+            MethodSyntax.AllExample();
         }
     }
 }
