@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,5 +66,18 @@ namespace LINQ.Utils
                    Pets.ElementAt(5)
                })
            };
+    }
+
+    internal class PetComparer : IEqualityComparer<Pet>
+    {
+        public bool Equals(Pet? x, Pet? y)
+        {
+            return x.Id == y.Id;
+        }
+
+        public int GetHashCode([DisallowNull] Pet obj)
+        {
+            return obj.Id;
+        }
     }
 }

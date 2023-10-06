@@ -8,8 +8,10 @@ namespace LINQ
     {
         static void Main(string[] args)
         {
-            MethodSyntax.AnyExample();
-            MethodSyntax.AllExample();
+            //MethodSyntax.AnyExample();
+            //MethodSyntax.AllExample();
+            //MethodSyntax.CountExample();
+            MethodSyntax.ContainsExample();
         }
     }
 }
