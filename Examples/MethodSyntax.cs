@@ -67,6 +67,24 @@ namespace LINQ.Examples
             IEnumerable<Pet> reversed = pets.Reverse();
             Printer<Pet>.PrintEnumerable(reversed, nameof(reversed));
         }
+
+        public static void MinMaxAvgSumExample()
+        {
+            IEnumerable<Pet> pets = Data.Pets;
+            Printer<Pet>.PrintEnumerable(pets, nameof(pets));
+
+            double maxWeight = pets.Max(pet => pet.Weight);
+            Printer<double>.PrintVariable(maxWeight, nameof(maxWeight));
+
+            int shortName = pets.Min(pet => pet.Name.Length);
+            Printer<int>.PrintVariable(shortName, nameof(shortName));
+
+            double avgWeight = pets.Average(pet => pet.Weight);
+            Printer<double>.PrintVariable(avgWeight, nameof(avgWeight));
+
+            double allWeight = pets.Sum(pet => pet.Weight);
+            Printer<double>.PrintVariable(allWeight, nameof(allWeight));
+        }
         
     }
 }

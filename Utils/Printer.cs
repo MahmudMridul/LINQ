@@ -18,5 +18,10 @@ namespace LINQ.Utils
             }
             Console.WriteLine("\n");
         }
+
+        public static void PrintVariable(T value, string name)
+        {
+            Console.WriteLine($"\n{name}: {value}\n");
+        }
     }
 }

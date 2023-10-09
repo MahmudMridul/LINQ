@@ -12,7 +12,8 @@ namespace LINQ
             //MethodSyntax.AllExample();
             //MethodSyntax.CountExample();
             //MethodSyntax.ContainsExample();
-            MethodSyntax.OrderbyExample();
+            //MethodSyntax.OrderbyExample();
+            MethodSyntax.MinMaxAvgSumExample();
         }
     }
 }
