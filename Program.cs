@@ -11,7 +11,8 @@ namespace LINQ
             //MethodSyntax.AnyExample();
             //MethodSyntax.AllExample();
             //MethodSyntax.CountExample();
-            MethodSyntax.ContainsExample();
+            //MethodSyntax.ContainsExample();
+            MethodSyntax.OrderbyExample();
         }
     }
 }

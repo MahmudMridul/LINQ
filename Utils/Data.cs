@@ -80,4 +80,12 @@ namespace LINQ.Utils
             return obj.Id;
         }
     }
+
+    internal class PetTypeComparer : IComparer<Pet>
+    {
+        public int Compare(Pet? x, Pet? y)
+        {
+            return x.PetType.CompareTo(y.PetType);
+        }
+    }
 }
