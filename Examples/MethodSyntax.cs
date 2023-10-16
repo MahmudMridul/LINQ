@@ -85,6 +85,33 @@ namespace LINQ.Examples
             double allWeight = pets.Sum(pet => pet.Weight);
             Printer<double>.PrintVariable(allWeight, nameof(allWeight));
         }
+
+        public static void ElementAtFirstLastExample()
+        {
+            // OrDefault versions of these methods doesn't throw exception if invalid, returns default value;
+            IEnumerable<int> numbers = new[] { 11, 12, 2, 21, 33, 43, 22, 5, 15, 27, 21, 10, 20, 31, 7 };
+            Printer<int>.PrintEnumerable(numbers, nameof(numbers));
+
+            Console.WriteLine(numbers.Count());
+            
+            int fourth = numbers.ElementAt(3);
+            Printer<int>.PrintVariable(fourth, nameof(fourth));
+
+            int sixth = numbers.ElementAtOrDefault(50);
+            Printer<int>.PrintVariable(sixth, nameof(sixth));
+
+            int firstEven = numbers.First(number => number % 2 == 0);
+            Printer<int>.PrintVariable(firstEven, nameof(firstEven));
+
+            int greaterThan100 = numbers.FirstOrDefault(number => number > 100);
+            Printer<int>.PrintVariable(greaterThan100, nameof(greaterThan100));
+
+            int lastEven = numbers.Last(number => number % 2 == 0);
+            Printer<int>.PrintVariable(lastEven, nameof(lastEven));
+
+            greaterThan100 = numbers.LastOrDefault(number => number > 100);
+            Printer<int>.PrintVariable(greaterThan100, nameof(greaterThan100));
+        }
         
     }
 }

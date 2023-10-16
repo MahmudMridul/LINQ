@@ -11,7 +11,7 @@ namespace LINQ.Utils
     {
         public static void PrintEnumerable(IEnumerable<T> items, string itemsName)
         {
-            Console.WriteLine($"{itemsName.ToUpper()}:\n");
+            Console.WriteLine($"{itemsName.ToUpper()}:");
             foreach (T item in items) 
             {
                 Console.WriteLine(item);
