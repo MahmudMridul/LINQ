@@ -7,21 +7,26 @@ using System.Threading.Tasks;
 
 namespace LINQ.Utils
 {
-    internal static class Printer<T>
+    internal static class Printer
     {
-        public static void PrintEnumerable(IEnumerable<T> items, string itemsName)
-        {
-            Console.WriteLine($"{itemsName.ToUpper()}:");
-            foreach (T item in items) 
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("\n");
-        }
+        //public static void PrintEnumerable(IEnumerable<T> items, string itemsName)
+        //{
+        //    Console.WriteLine($"{itemsName.ToUpper()}:");
+        //    foreach (T item in items) 
+        //    {
+        //        Console.WriteLine(item);
+        //    }
+        //    Console.WriteLine("\n");
+        //}
 
-        public static void PrintVariable(T value, string name)
+        //public static void PrintVariable(T value, string name)
+        //{
+        //    Console.WriteLine($"\n{name}: {value}\n");
+        //}
+
+        public static void Print<T>(T value, string name)
         {
-            Console.WriteLine($"\n{name}: {value}\n");
+            Console.WriteLine($"{name}: {value}\n");
         }
     }
 }
