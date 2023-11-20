@@ -45,5 +45,22 @@ namespace LINQ.Utils
             }
             Console.WriteLine();
         }
+
+        public static void Print<T>(IEnumerable<object> list, string listName)
+        {
+            Console.WriteLine($"{listName}:");
+            if (list.Any())
+            {
+                foreach( object obj in list )
+                {
+                    Print<object>(obj, nameof(obj));
+                }
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine($"{listName} is empty");
+            }
+        }
     }
 }
