@@ -1,6 +1,8 @@
 ﻿using LINQ.ExtensionMethods;
 using LINQ.DeferredExecution;
 using LINQ.Examples;
+using LINQ.Examples.Methods;
+using LINQ.Utils;
 
 namespace LINQ
 {
@@ -14,7 +16,10 @@ namespace LINQ
             //MethodSyntax.ContainsExample();
             //MethodSyntax.OrderbyExample();
             //MethodSyntax.MinMaxAvgSumExample();
-            MethodSyntax.ElementAtFirstLastExample();
+
+            //All.Run();
+            //Any.Run();
+            Select.Run();
         }
     }
 }
