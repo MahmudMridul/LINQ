@@ -2,9 +2,9 @@
 
 namespace LINQ.Examples.Methods
 {
-    internal class Average
+    internal class Average : ILinqFunctions
     {
-        public static void Run()
+        public void Run()
         {
             int[] nums = { 3, 1, 5, 7, 10, 12, 20, 44, 67, 21, 100, 83 };
             //Finds average of the enumerable

@@ -2,9 +2,9 @@
 
 namespace LINQ.Examples.Methods
 {
-    internal class Select
+    internal class Select : ILinqFunctions
     {
-        public static void Run()
+        public void Run()
         {
             int[] nums = { 2, 1, 5, 3, 10 };
             //Performs specified operation on each element

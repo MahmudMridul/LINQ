@@ -3,9 +3,9 @@ using LINQ.Utils;
 
 namespace LINQ.Examples.Methods
 {
-    internal class Where
+    internal class Where : ILinqFunctions
     {
-        public static void Run()
+        public void Run()
         {
             int[] nums = Data.nums;
             //Returns IEnumerable of data that satisfies condition

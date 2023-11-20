@@ -4,9 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace LINQ.Examples.Methods
 {
-    internal class Contains
+    internal class Contains : ILinqFunctions
     {
-        public static void Run()
+        public void Run()
         {
             //Throws exception
             //int[] nums = Data.nullNums;

@@ -2,11 +2,10 @@
 
 namespace LINQ.Examples.Methods
 {
-    internal class Any
+    internal class Any : ILinqFunctions
     {
-        public static void Run()
+        public void Run()
         {
-            Console.WriteLine("***** ANY EXAMPLES *****");
             int[] nums = { 1, 2, 3, 4, 5, 4, 3, 7 };
             //checks if any item in the IEnumerable meets the condition
             bool anyGreaterThanFive = nums.Any(num => num > 5);
