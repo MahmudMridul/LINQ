@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,30 @@ namespace LINQ.Utils
             Console.WriteLine($"{listName}:");
             if(list.Any())
             {
-                Console.WriteLine(string.Join("\n", list));
+                Console.WriteLine(string.Join("\n", list) + "\n");
             }
             else
             {
                 Console.WriteLine($"{listName} is empty");
             }
+        }
+
+        public static void Print<T>(object obj, string objName)
+        {
+            if(obj == null)
+            {
+                Console.WriteLine($"{objName} is NULL\n");
+                return;
+            }
+            Type objType = obj.GetType();
+            PropertyInfo[] properties = objType.GetProperties();
+            Console.WriteLine($"{objName}: ");
+            foreach( PropertyInfo property in properties)
+            {
+                var value = property.GetValue(obj);
+                Console.WriteLine($"{property.Name}: {value}");
+            }
+            Console.WriteLine();
         }
     }
 }
