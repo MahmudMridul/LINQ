@@ -12,8 +12,8 @@ namespace LINQ.Examples.Methods
             Printer.Print<double>(average, nameof(average));
 
             var students = Data.students;
-            var averageAge = students.Average(student => student.Age);
-            Printer.Print<double>(averageAge, nameof(averageAge));
+            var averageMarks = students.Average(student => student.MarksPercentage);
+            Printer.Print<double>(averageMarks, nameof(averageMarks));
         }
     }
 }

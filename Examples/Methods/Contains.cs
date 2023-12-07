@@ -15,8 +15,8 @@ namespace LINQ.Examples.Methods
             bool has50 = nums.Contains(50);
             Printer.Print<bool>(has50, nameof(has50));
 
-            Person kamal = new Person(101, "Kamal", "Student", 20, "Single");
-            Person[] students = Data.students;
+            Student kamal = new Student(101, "Kamal", "CSE", 20);
+            Student[] students = Data.students;
             //Doesn't work like this with object as objects are compared by reference
             bool kamalIsPresent = students.Contains(kamal);
             Printer.Print<bool>(kamalIsPresent, nameof(kamalIsPresent));
@@ -26,14 +26,14 @@ namespace LINQ.Examples.Methods
         }
     }
 
-    internal class StudentComparer : IEqualityComparer<Person>
+    internal class StudentComparer : IEqualityComparer<Student>
     {
-        public bool Equals(Person first, Person second)
+        public bool Equals(Student first, Student second)
         {
             return first.NID == second.NID;
         }
 
-        public int GetHashCode([DisallowNull] Person obj)
+        public int GetHashCode([DisallowNull] Student obj)
         {
             throw new NotImplementedException();
         }
