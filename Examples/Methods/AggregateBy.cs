@@ -2,43 +2,6 @@
 {
     public class AggregateBy
     {
-        public static void Run_1()
-        {
-            IEnumerable<Employee> employees = new List<Employee>
-            {
-                new Employee { Department = "HR", Salary = 1000 },
-                new Employee { Department = "HR", Salary = 1200 },
-                new Employee { Department = "IT", Salary = 1300 },
-                new Employee { Department = "IT", Salary = 1500 },
-                new Employee { Department = "Account", Salary = 1500 },
-                new Employee { Department = "Finance", Salary = 1600 },
-            };
-
-            var totalSalaryByDept = employees.AggregateBy(
-                    keySelector: emp => emp.Department,
-                    seed: 0,
-                    func: (total, emp) => total + emp.Salary
-                );
-
-            var averageSalaryByDept = employees.AggregateBy<Employee, string, dynamic>(
-                    keySelector: emp => emp.Department,
-                    seedSelector: (Department) => new { Sum = 0, Count = 0 },
-                    func: (acc, emp) => new { Sum = acc.Sum + emp.Salary, Count = acc.Count + 1 }
-                );
-
-            foreach (var item in totalSalaryByDept)
-            {
-                Console.WriteLine($"{item.Key} - {item.Value}");
-            }
-
-            foreach (var item in averageSalaryByDept)
-            {
-                Console.WriteLine($"{item.Key} - {item.Value}");
-            }
-
-
-        }
-
         public static void Run_2()
         {
             var orders = new List<Order>
@@ -102,12 +65,38 @@
             }
 
         }
-    }
 
-    public class Employee
-    {
-        public string Department { get; set; } = String.Empty;
-        public int Salary { get; set; }
+        public static void Run_4()
+        {
+            var sentences = new List<string>
+            {
+                "The quick brown fox jumps over the lazy dog",
+                "A Fox is a wild animal that belongs to the canid family",
+                "Dogs make great pets and companions",
+                "The DOG barked at the passing FOX"
+            };
+
+            var words = sentences.SelectMany(s => s.Split(' ')).Where(w => !string.IsNullOrWhiteSpace(w));
+
+            var caseInsensitiveComparer = EqualityComparer<string>.Create(
+                // Equality function (case-insensitive comparison)
+                (s1, s2) => string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase),
+                // GetHashCode function (case-insensitive hash)
+                s => s?.ToLower().GetHashCode() ?? 0
+            );
+
+            var wordCounts = words.AggregateBy(
+                keySelector: word => word,
+                seed: 0,
+                func: (acc, word) => acc + 1,
+                keyComparer: caseInsensitiveComparer
+            );
+
+            foreach(var item in wordCounts)
+            {
+                Console.WriteLine($"{item.Key}\t{item.Value}");
+            }
+        }
     }
 
     public class Order

@@ -9,7 +9,7 @@ namespace LINQ
 
         public static void Main(string[] args)
         {
-            AggregateBy.Run_3();
+            AggregateBy.Run_4();
         }
     }
 }
