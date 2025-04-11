@@ -16,7 +16,7 @@ namespace LINQ.Utils
             Console.WriteLine($"{listName}:");
             if(list.Any())
             {
-                Console.WriteLine(string.Join("\n", list) + "\n");
+                Console.WriteLine(string.Join(" ", list) + "\n");
             }
             else
             {
