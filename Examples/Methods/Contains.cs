@@ -1,41 +1,59 @@
 ﻿
 using LINQ.Utils;
-using System.Diagnostics.CodeAnalysis;
 
 namespace LINQ.Examples.Methods
 {
-    internal class Contains : ILinqFunctions
+    public class Contains
     {
-        public void Run()
+        public static void Run()
         {
             //Throws exception
             //int[] nums = Data.nullNums;
-            int[] nums = Data.nums;
+            int[] nums = { 1, 2, 3, 6, 5, 3, 8, 10 };
             //Checks if enumerable contains element
             bool has50 = nums.Contains(50);
-            Printer.Print<bool>(has50, nameof(has50));
+            Printer.Print(has50, nameof(has50));
 
-            Student kamal = new Student(101, "Kamal", "CSE", 20);
-            Student[] students = Data.students;
-            //Doesn't work like this with object as objects are compared by reference
-            bool kamalIsPresent = students.Contains(kamal);
-            Printer.Print<bool>(kamalIsPresent, nameof(kamalIsPresent));
+            bool has6 = nums.Contains(6);
+            Printer.Print(has6, nameof(has6));
 
-            bool isKamalPresent = students.Contains(kamal, new StudentComparer());
-            Printer.Print<bool>(isKamalPresent, nameof(isKamalPresent));
+            var list = new List<ContainsObject>
+            {
+                new() { Id = 1, Name = "Item 1", Flag = true },
+                new() { Id = 2, Name = "Item 2", Flag = false },
+                new() { Id = 3, Name = "Item 3", Flag = true },
+                new() { Id = 4, Name = "Item 4", Flag = false },
+                new() { Id = 5, Name = "Item 5", Flag = true },
+                new() { Id = 6, Name = "Item 6", Flag = false },
+                new() { Id = 7, Name = "Item 7", Flag = true },
+                new() { Id = 8, Name = "Item 8", Flag = false }
+            };
+
+            var idComparer = EqualityComparer<ContainsObject>.Create(
+                (first, second) => first.Id == second.Id, 
+                obj => obj.Id.GetHashCode()
+            );
+
+            var hasId5 = list.Contains(new ContainsObject { Id = 5, Name = "Name", Flag = false }, idComparer);
+            Printer.Print(hasId5, nameof(hasId5));
+
+            var nameComparer = EqualityComparer<ContainsObject>.Create(
+                (first, second) => first.Name.Equals(second.Name),
+                obj => obj.Name.GetHashCode()
+            );
+
+            var hasName = list.Contains(new ContainsObject { Id = 3, Name = "Name", Flag = false }, nameComparer);
+            Printer.Print(hasName, nameof(hasName));
+
+
+            
         }
     }
 
-    internal class StudentComparer : IEqualityComparer<Student>
+    public class ContainsObject
     {
-        public bool Equals(Student first, Student second)
-        {
-            return first.NID == second.NID;
-        }
-
-        public int GetHashCode([DisallowNull] Student obj)
-        {
-            throw new NotImplementedException();
-        }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public bool Flag { get; set; }
     }
 }
