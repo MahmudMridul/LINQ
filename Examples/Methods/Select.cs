@@ -14,7 +14,7 @@ namespace LINQ.Examples.Methods
             var students = Data.students;
             //Creating anonymous type, mofifying object, creating DTOs
             var onlyNameAndID = students.Select(person => new { ID = person.NID, Name = person.Name });
-            Printer.Print<Person>(onlyNameAndID, nameof(onlyNameAndID));
+            Printer.Print(onlyNameAndID, nameof(onlyNameAndID));
         }
     }
 }
