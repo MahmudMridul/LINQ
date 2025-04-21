@@ -1,5 +1,5 @@
-﻿
-using System.Reflection;
+﻿using System.Reflection;
+using System.Text;
 
 
 namespace LINQ.Utils
@@ -11,52 +11,130 @@ namespace LINQ.Utils
             Console.WriteLine($"{name}: {value}\n");
         }
 
-        public static void Print<T>(IEnumerable<T> list, string listName) 
+        public static void Print<T>(IEnumerable<T> items, string nameofItems = "")
         {
-            Console.WriteLine($"{listName}:");
-            if(list.Any())
+            if (items == null)
             {
-                Console.WriteLine(string.Join(" ", list) + "\n");
+                Console.WriteLine("NULL\n");
+                return;
+            }
+
+            if (!items.Any())
+            {
+                Console.WriteLine("EMPTY\n");
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(nameofItems))
+            {
+                Console.WriteLine(nameofItems);
+            }
+
+            // if a type has multiple properties, it's considered a complex type.
+            // if the type has exactly one property but that property is NOT named "Length" or "Count".
+            // This is a heuristic to handle collections like arrays, lists, and strings
+            // which have a single property but shouldn't be treated as complex objects.
+            bool isComplexType = typeof(T).GetProperties().Length > 1 ||
+                                (typeof(T).GetProperties().Length == 1 &&
+                                typeof(T).GetProperties()[0].Name != "Length" &&
+                                typeof(T).GetProperties()[0].Name != "Count");
+
+            if (isComplexType)
+            {
+                PrintObjectCollection(items);
             }
             else
             {
-                Console.WriteLine($"{listName} is empty");
+                PrintBuiltinTypeCollection(items);
             }
         }
 
-        public static void Print<T>(object obj, string objName)
+        public static void PrintBuiltinTypeCollection<T>(IEnumerable<T> items)
         {
-            if(obj == null)
+            foreach (T item in items)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine("\n");
+        }
+
+        public static void PrintObjectCollection<T>(IEnumerable<T> items)
+        {
+            foreach (T item in items)
+            {
+                if (item == null)
+                {
+                    Console.WriteLine("NULL");
+                    continue;
+                }
+
+                Type type = item.GetType();
+                PropertyInfo[] properties = type.GetProperties();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("{ ");
+                bool isFirst = true;
+
+                foreach (PropertyInfo property in properties)
+                {
+                    if (!isFirst)
+                    {
+                        sb.Append(", ");
+                    }
+                    object? value = property.GetValue(item);
+                    string valueString = "";
+
+                    if (value is string)
+                    {
+                        valueString = $"\"{value}\"";
+                    }
+                    else
+                    {
+                        valueString = value?.ToString() ?? "NULL";
+                    }
+                    sb.Append($"{property.Name} = {valueString}");
+                    isFirst = false;
+                }
+                sb.Append(" }");
+                Console.WriteLine(sb.ToString());
+            }
+        }
+
+        public static void Print(object item, string objName)
+        {
+            if(item == null)
             {
                 Console.WriteLine($"{objName} is NULL\n");
                 return;
             }
-            Type objType = obj.GetType();
-            PropertyInfo[] properties = objType.GetProperties();
-            Console.WriteLine($"{objName}: ");
-            foreach( PropertyInfo property in properties)
-            {
-                var value = property.GetValue(obj);
-                Console.WriteLine($"{property.Name}: {value}");
-            }
-            Console.WriteLine();
-        }
 
-        public static void Print<T>(IEnumerable<object> list, string listName)
-        {
-            Console.WriteLine($"{listName}:");
-            if (list.Any())
+            Type type = item.GetType();
+            PropertyInfo[] properties = type.GetProperties();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{ ");
+            bool isFirst = true;
+
+            foreach (PropertyInfo property in properties)
             {
-                foreach( object obj in list )
+                if (!isFirst)
                 {
-                    Print<object>(obj, nameof(obj));
+                    sb.Append(", ");
                 }
-                Console.WriteLine();
+                object? value = property.GetValue(item);
+                string valueString = "";
+
+                if (value is string)
+                {
+                    valueString = $"\"{value}\"";
+                }
+                else
+                {
+                    valueString = value?.ToString() ?? "NULL";
+                }
+                sb.Append($"{property.Name} = {valueString}");
+                isFirst = false;
             }
-            else
-            {
-                Console.WriteLine($"{listName} is empty");
-            }
+            sb.Append(" }");
+            Console.WriteLine(sb.ToString() + "\n");
         }
     }
 }
