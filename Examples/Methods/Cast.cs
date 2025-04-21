@@ -28,6 +28,7 @@ namespace LINQ.Examples.Methods
             Printer.Print(dogs, nameof(dogs));
         }
 
+        // Primary constructor
         public class Animal(string name)
         {
             public string Name { get; set; } = name;
