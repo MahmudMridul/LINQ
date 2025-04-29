@@ -9,7 +9,7 @@ namespace LINQ
 
         public static void Main(string[] args)
         {
-            Cast.Run();
+            Chunk.Run();
         }
     }
 }
