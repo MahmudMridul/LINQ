@@ -9,7 +9,7 @@ namespace LINQ
 
         public static void Main(string[] args)
         {
-            Concat.Run();
+            Count.Run();
         }
     }
 }
