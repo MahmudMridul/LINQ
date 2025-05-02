@@ -9,7 +9,7 @@ namespace LINQ
 
         public static void Main(string[] args)
         {
-            Count.Run();
+            CountBy.Run();
         }
     }
 }
